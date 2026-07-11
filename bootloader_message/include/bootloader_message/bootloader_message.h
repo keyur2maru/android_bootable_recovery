@@ -142,6 +142,11 @@ struct misc_control_message {
 #define MISC_KCMDLINE_MESSAGE_VERSION 1
 #define MISC_KCMDLINE_MAGIC_HEADER 0x6ab5110c
 #define MISC_KCMDLINE_BINDER_RUST 0x1
+// channel: Android 17 renamed/extended the binder kcmdline flags. system/extras
+// kcmdlinectrl (A17) uses FORCE_RUST/FORCE_C, but this lineage-23.0 header only
+// had the old BINDER_RUST. Keep the RUST bit value (0x1) and add FORCE_C (0x2).
+#define MISC_KCMDLINE_BINDER_FORCE_RUST 0x1
+#define MISC_KCMDLINE_BINDER_FORCE_C 0x2
 
 #define MISC_CONTROL_MESSAGE_VERSION 1
 #define MISC_CONTROL_MAGIC_HEADER 0x736d6f72

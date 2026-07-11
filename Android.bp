@@ -71,6 +71,10 @@ recovery_cc_defaults {
                 "-DRECOVERY_API_VERSION=%s",
                 "-Wall",
                 "-Werror",
+                // channel: lineage-23.0 recovery vs A17 clang (r584948b) is stricter.
+                // Demote the -Wall warnings that this older recovery source trips so
+                // the recovery tree builds without patching many upstream files.
+                "-Wno-error=unused-but-set-variable",
             ],
         },
     },
@@ -179,7 +183,7 @@ cc_binary {
     ],
 
     shared_libs: [
-        "android.hardware.health-V4-ndk", // from librecovery_utils
+        "android.hardware.health-V5-ndk", // from librecovery_utils
         "android.hardware.boot-V1-ndk",
         "librecovery_ui",
     ],

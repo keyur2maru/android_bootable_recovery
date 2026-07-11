@@ -56,6 +56,14 @@ cc_defaults {
         // external dependencies
         "libvintf",
     ],
+
+    // channel: A17's libsnapshot cow_reader.h pulls update_engine headers
+    // (payload_consumer/file_descriptor.h). Pristine A17 recovery lists this;
+    // the lineage-23.0 recovery predates it. libupdate_engine_headers is
+    // recovery_available.
+    header_libs: [
+        "libupdate_engine_headers",
+    ],
 }
 
 cc_test_host {

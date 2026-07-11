@@ -29,6 +29,14 @@
 // 32K - 64K    System space, used for miscellanious AOSP features. See below.
 // Note that these offsets are admitted by bootloader,recovery and uncrypt, so they
 // are not configurable without changing all of them.
+// channel: BOARD_RECOVERY_BLDRMSG_OFFSET was exported to consumers via the
+// LineageOS-only soong `export_cflags` property, which AOSP soong does not
+// recognize. Provide a fallback so consumers that include this header (and do
+// not get the local -D) compile. The lineage_recovery config var is unset on
+// this device, so the effective value is 0 for both the library and consumers.
+#ifndef BOARD_RECOVERY_BLDRMSG_OFFSET
+#define BOARD_RECOVERY_BLDRMSG_OFFSET 0
+#endif
 constexpr size_t BOOTLOADER_MESSAGE_OFFSET_IN_MISC = BOARD_RECOVERY_BLDRMSG_OFFSET;
 constexpr size_t VENDOR_SPACE_OFFSET_IN_MISC = 2 * 1024 + BOARD_RECOVERY_BLDRMSG_OFFSET;
 constexpr size_t WIPE_PACKAGE_OFFSET_IN_MISC = 16 * 1024 + BOARD_RECOVERY_BLDRMSG_OFFSET;

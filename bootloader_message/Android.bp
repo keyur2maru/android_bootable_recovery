@@ -33,10 +33,9 @@ cc_defaults {
         any @ flag_val: ["-DBOARD_RECOVERY_BLDRMSG_OFFSET=" + flag_val],
         default: ["-DBOARD_RECOVERY_BLDRMSG_OFFSET=0"],
     }),
-    export_cflags: select(soong_config_variable("lineage_recovery", "bootloader_message_offset"), {
-        any @ flag_val: ["-DBOARD_RECOVERY_BLDRMSG_OFFSET=" + flag_val],
-        default: ["-DBOARD_RECOVERY_BLDRMSG_OFFSET=0"],
-    }),
+    // channel: `export_cflags` is a LineageOS-only soong property, not present
+    // in AOSP soong. The exported define now comes from a header fallback in
+    // include/bootloader_message/bootloader_message.h.
     shared_libs: [
         "libbase",
     ],
